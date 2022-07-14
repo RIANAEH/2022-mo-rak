@@ -39,11 +39,17 @@ type PollProgressType = {
   [key: string]: Array<PollItemInterface['id']>;
 };
 
+type PollSelectedItemType = {
+  itemId: number;
+  description: string;
+}
+
 export {
   PollInterface,
   PollCreateType,
   PollItemInterface,
   PollProgressType,
   PollResultInterface,
-  PollMembersInterface
+  PollMembersInterface,
+  PollSelectedItemType
 };

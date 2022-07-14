@@ -46,6 +46,7 @@ function PollCreateForm() {
       const pollId = res.headers.get('location').split('polls/')[1];
 
       pollContext?.setPollId(pollId);
+      
       // TODO: 상수화
       navigate('/progress');
     } catch (err) {

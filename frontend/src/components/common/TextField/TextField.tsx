@@ -63,7 +63,7 @@ const StyledContainer = styled.div<
   }
 >(
   ({ width, height, borderRadius, variantStyle, position }) => `
-    ${variantStyle}
+    ${variantStyle};
     width: ${width || '100%'};
     height: ${height}; 
     border-radius: ${borderRadius};

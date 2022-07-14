@@ -17,14 +17,14 @@ function PollProgressForm() {
   // TODO: 기본 객체를 줘야할까? undefined로 놓는 것이 위험한가?
   const [pollInfo, setPollInfo] = useState<PollInterface>();
   const [selectedPollItems, setSelectedPollItems] = useState<Array<PollItemInterface['id']>>([]);
+  const [description, setDescription] = useState('');
 
   // TODO: 객체로 state로 관리하는 것에 단점이 분명히 있다. 리팩토링 필요
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
-      if (pollInfo) {
-        await progressPoll(pollInfo.id, { itemIds: selectedPollItems });
+      if (pollInfo) { 
+        await progressPoll(pollInfo.id, [{ itemId: selectedPollItems[0], description: description }]); // TODO: 다시...!
         navigate('/result');
       }
     } catch (err) {
@@ -37,8 +37,8 @@ function PollProgressForm() {
     const id = Number(e.target.id);
 
     if (mode === 'single') {
+      // 디스크립션창을 추가한다 
       setSelectedPollItems([id]);
-
       return;
     }
 
@@ -65,8 +65,7 @@ function PollProgressForm() {
       // if (pollId) {
       //   fetchPollInfo(pollId);
       // }
-
-      fetchPollInfo(10);
+      fetchPollInfo(2); 
 
       // TODO: pollid가 없을 때 메인 화면으로 보내주기!
     } catch (err) {
@@ -95,6 +94,7 @@ function PollProgressForm() {
               selectedPollItems={selectedPollItems}
               handleSelectPollItem={handleSelectPollItem}
               allowedPollCount={pollInfo.allowedPollCount}
+              setDescription={setDescription}
             />
           </MarginContainer>
           <PollProgressSubmitButton />
